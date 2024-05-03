@@ -31,8 +31,73 @@
     .categories label input {
         @apply opacity-0 cursor-pointer relative z-40 w-5 h-5
     }
+
+    /* productCard design */
+    .product_card {
+        @apply flex flex-col gap-1 p-5 rounded-md
+    }
+
+    .product_normal_image {
+        @apply h-[200px] mb-5
+    }
+
+    .price_icons {
+        @apply flex justify-between items-center text-[#000000cd]
+    }
+
+    .product_card .price_icons .icons_box {
+        @apply flex gap-2 text-xl
+    }
+
+    .product_card .price_icons .icons_box i {
+        @apply transition duration-500 ease-out;
+    }
 }
 
+/* category section vanilla css  */
 .categories label input:checked~.checkmark {
     background-color: #B3C8CF;
+}
+
+/* product card vanilla css  */
+.product_card {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.285), 0px 2px 7px #B3C8CF;
+    overflow: hidden;
+    z-index: 1;
+    position: relative;
+}
+
+.product_card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background-color: #F8F6E3;
+    z-index: -1;
+    transition: 0.5s;
+}
+
+.product_card:hover::before {
+    width: 100%;
+}
+
+.product_card .stars i:hover {
+    transform: rotateY(180deg);
+}
+
+/* scrollbar design vanilla css */
+::-webkit-scrollbar {
+    width: 12px;
+    background: #B3C8CF;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888;
+    border-radius: 6px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
 }
