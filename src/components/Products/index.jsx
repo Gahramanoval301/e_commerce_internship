@@ -10,36 +10,46 @@ export default function Products() {
     const selectedSexValue = useSelector((state) => state.options.sex_value)
     const selectedTypeValue = useSelector((state) => state.options.type_value)
     const searchText = useSelector((state) => state.options.searched_text);
-    console.log(searchText);
+    const selectedUseValue = useSelector((state) => state.options.use_value)
+    const selectedPriceValue = useSelector((state) => state.options.price_value)
+    const selectedColorValue = useSelector((state) => state.options.color_value)
+
     useEffect(() => {
         axios.get(url).then((res) => {
             dispatch({ type: types.GET_PRODUCTS, payload: res.data[0].products });
         })
     }, [])
-    console.log(selectedTypeValue);
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const filteredProducts = state.products.filter(({ sex, category, title }) => {
+    const filteredProducts = state.products.filter(({ sex, category, title, use, color }) => {
         const sexMatch = !selectedSexValue || sex === selectedSexValue;
         const typeMatch = selectedTypeValue === 'all_category' || category === selectedTypeValue;
         const titleMatch = (!searchText || title.toLowerCase().includes(searchText.toLowerCase()));
+        const useMatch = selectedUseValue === 'all_use' || use === selectedUseValue
+        const colorMatch = selectedColorValue === 'all_color' || color === selectedColorValue
 
-        if (sexMatch && titleMatch) {
-            if (selectedTypeValue === 'all_category' || selectedTypeValue === '') {
-                return true; // Include all products matching sex and title if type is all or empty
-            } else {
-                return typeMatch; // Include products matching sex, type, and title
-            }
-        } else {
-            return false; // Exclude products that don't match sex and title
+        if (
+            (selectedSexValue === '' || sexMatch) &&
+            (selectedTypeValue === 'all_category' || typeMatch) &&
+            (searchText === '' || titleMatch) &&
+            (selectedUseValue === '' || useMatch) &&
+            (selectedColorValue === '' || colorMatch) 
+        ) {
+            return true
+        }
+        else {
+            return false;
         }
     });
 
 
 
-    const myProducts = (selectedSexValue === '') && (selectedTypeValue === 'all_category') && (searchText === '') ? state.products : filteredProducts;
+    const myProducts = (selectedSexValue === '') &&
+        (selectedTypeValue === 'all_category' || selectedTypeValue === '')
+        && (searchText === '') &&
+        (selectedUseValue === '' || selectedUseValue === 'all_use') &&
+        (selectedColorValue === '' || selectedColorValue === 'all_colors') ? state.products : filteredProducts;
 
-    console.log(myProducts);
     return (
         <div className='p-5 grid lg:grid-cols-3 xl:grid-cols-4 gap-4'>
             {myProducts.map((product) => {
