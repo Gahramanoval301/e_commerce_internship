@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router"
 import Home from "../pages/home"
-import ProductSlug from "../components/ProductSlug"
+import ProductSlug from "../pages/ProductSlug"
 
 const WebRouting = () => {
     return (
