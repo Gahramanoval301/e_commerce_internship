@@ -23,7 +23,9 @@
             "manufacturer": "Amazon essentials",
             "dataFirstAvaliable": "December 19, 2022",
             "material": "synthetic",
-            "slug":"mens-service-shoe"
+            "slug": "mens-service-shoe",
+            "isLike": "false",
+            "isAdded": "false"
         },
         {
             "id": 1,
@@ -48,7 +50,9 @@
             "manufacturer": "AK Anne Klein Sport",
             "dataFirstAvaliable": "July 20, 2018",
             "material": "man made",
-            "slug":"womens-tara-wedge-pump"
+            "slug": "womens-tara-wedge-pump",
+            "isLike": "false",
+            "isAdded": "false"
         },
         {
             "id": 2,
@@ -73,7 +77,9 @@
             "manufacturer": "Amazon essentials",
             "dataFirstAvaliable": "April 28, 2021",
             "material": "synthetic",
-            "slug":"womens-loafer-flat"
+            "slug": "womens-loafer-flat",
+            "isLike": "false",
+            "isAdded": "false"
         },
         {
             "id": 3,
@@ -100,7 +106,9 @@
             "manufacturer": "Columbia",
             "dataFirstAvaliable": "October 31, 2022",
             "material": "rubber",
-            "slug":"mens-crestwood-waterproof-hiking-shoe"
+            "slug": "mens-crestwood-waterproof-hiking-shoe",
+            "isLike": "false",
+            "isAdded": "false"
         },
         {
             "id": 4,
@@ -127,7 +135,9 @@
             "manufacturer": "Amazon essentials",
             "dataFirstAvaliable": "December 19, 2022",
             "material": "rubber",
-            "slug":"womens-608-v5-cross-trainer"
+            "slug": "womens-608-v5-cross-trainer",
+            "isLike": "false",
+            "isAdded": "false"
         }
     ]
 }
