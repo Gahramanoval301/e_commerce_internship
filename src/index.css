@@ -52,6 +52,31 @@
     .product_card .price_icons .icons_box i {
         @apply transition duration-500 ease-out;
     }
+
+    /* product single design */
+    .info-section {
+        @apply flex gap-3
+    }
+
+    .info-section p {
+        @apply font-semibold
+    }
+
+    .products_slug_head {
+        @apply text-xl font-bold tracking-wider
+    }
+
+    .info-box {
+        @apply flex flex-col gap-2
+    }
+
+    .image-frame {
+        @apply w-16 h-16 border-2 border-primary-darkest p-1 cursor-pointer bg-white opacity-25 hover:opacity-100
+    }
+
+    .image-frame img {
+        @apply object-contain h-full 
+    }
 }
 
 /* category section vanilla css  */
