@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateSearchedText } from '../../slices/OptionCategorySlice';
+import { Link } from 'react-router-dom';
 
 export default function Header() {
     const [searchedValue, setSearchedValue] = useState('');
@@ -9,7 +10,7 @@ export default function Header() {
 
     const handleChange = (event) => {
         setSearchedValue(event.target.value)
-        
+
         dispatch(updateSearchedText(event.target.value));
     }
 
@@ -28,12 +29,14 @@ export default function Header() {
                     </button>
                 </div>
                 <div className='flex gap-5 justify-start items-center mr-5'>
-                    <a className='text-2xl' href=""><i className="fa-regular fa-heart"></i></a>
-                    <a className='text-2xl' href="">
+                    <Link className='text-2xl'>
+                        <i className="fa-regular fa-heart"></i>
+                    </Link>
+                    <Link className='text-2xl' to='/cart'>
                         <i className="fa-solid fa-cart-shopping"></i>
-                    </a>
+                    </Link>
                 </div>
-            </div>
-        </header>
+            </div >
+        </header >
     )
 }
