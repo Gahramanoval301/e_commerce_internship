@@ -1,7 +1,7 @@
 {
     "products": [
         {
-            "id": 0,
+            "id": 1,
             "images": {
                 "normal": "/shoes/men_service_shoe/men's_service_shoe.jpg",
                 "front": "/shoes/men_service_shoe/men's_service_shoe_front.jpg",
@@ -25,10 +25,11 @@
             "material": "synthetic",
             "slug": "mens-service-shoe",
             "isLike": "false",
-            "isAdded": "false"
+            "isAdded": "false",
+            "numbersOfProduct": 0
         },
         {
-            "id": 1,
+            "id": 2,
             "images": {
                 "normal": "/shoes/women_tara_wedge_pump/women;s_tara_wedge_pump.jpg",
                 "back": "/shoes/women_tara_wedge_pump/women;s_tara_wedge_pump_back.jpg",
@@ -52,10 +53,11 @@
             "material": "man made",
             "slug": "womens-tara-wedge-pump",
             "isLike": "false",
-            "isAdded": "false"
+            "isAdded": "false",
+            "numbersOfProduct": 0
         },
         {
-            "id": 2,
+            "id": 3,
             "images": {
                 "normal": "/shoes/loafer_flat/loafer_flat.jpg",
                 "bottom": "/shoes/loafer_flat/loafer_flat_bottom.jpg"
@@ -79,10 +81,11 @@
             "material": "synthetic",
             "slug": "womens-loafer-flat",
             "isLike": "false",
-            "isAdded": "false"
+            "isAdded": "false",
+            "numbersOfProduct": 0
         },
         {
-            "id": 3,
+            "id": 4,
             "images": {
                 "normal": "/shoes/crestwood_waterproof_hiking_shoe/crestwood_waterproof_hiking_shoe.jpg",
                 "front": "public/shoes/crestwood_waterproof_hiking_shoe/crestwood_waterproof_hiking_shoe.jpg/shoes/crestwood_waterproof_hiking_shoe/crestwood_waterproof_hiking_shoe_front.jpg",
@@ -108,10 +111,11 @@
             "material": "rubber",
             "slug": "mens-crestwood-waterproof-hiking-shoe",
             "isLike": "false",
-            "isAdded": "false"
+            "isAdded": "false",
+            "numbersOfProduct": 0
         },
         {
-            "id": 4,
+            "id": 5,
             "images": {
                 "normal": "/shoes/608_v5_cross_trainer/608_v5_cross_trainer.jpg",
                 "front": "/shoes/608_v5_cross_trainer/608_v5_cross_trainer_front.jpg",
@@ -137,7 +141,8 @@
             "material": "rubber",
             "slug": "womens-608-v5-cross-trainer",
             "isLike": "false",
-            "isAdded": "false"
+            "isAdded": "false",
+            "numbersOfProduct": 0
         }
     ]
 }
