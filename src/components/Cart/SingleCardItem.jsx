@@ -1,11 +1,17 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
+export default function SingleCardItem({ item, counts, card_items }) {
+ 
+    console.log(item, counts);
 
-export default function SingleCardItem({ item }) {
-    console.log(item);
+
+    //calculateTotalPrice
     const calculateTotalPrice = () => {
         return Number(item.price.slice(1)).toFixed() * item.numbersOfProduct;
     }
+
+    const isMultiple = counts[item.id] > 1;
+
     return (
         <div className='grid grid-cols-10'>
             <div className='col-span-4 flex gap-2'>
@@ -26,6 +32,13 @@ export default function SingleCardItem({ item }) {
                             <p>Material:</p>
                             <span>{item.material}</span>
                         </div>
+                        {/* Render count only if it's greater than 1 */}
+                        {isMultiple && (
+                            <div className='info-section'>
+                                <p>Count:</p>
+                                <span>{counts[item.id]}</span>
+                            </div>
+                        )}
                     </div>
                 </div>
             </div>
