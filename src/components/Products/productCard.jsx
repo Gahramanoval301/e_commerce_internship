@@ -2,12 +2,15 @@ import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
 import { Link } from "react-router-dom";
 import { initialState, reducer, types } from '../../reducer';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { addItem } from '../../slices/CartItemsSlice';
 
 export default function ProductCard({ product }) {
     const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products'
-    const cart_url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/cart'
+    const dispatch_slice = useDispatch()
+    const card_items = useSelector((state) => state.cartItems.items)
 
+    //render stars based on their amount
     const renderStars = () => {
         const stars = [];
         for (let i = 0; i < product.star; i++) {
@@ -16,37 +19,31 @@ export default function ProductCard({ product }) {
         return stars;
     }
 
-    const [state, dispatch] = useReducer(reducer, initialState)
 
     useEffect(() => {
         axios.get(url).then(({ data }) => {
             dispatch({ type: types.GET_PRODUCTS, payload: data[0].products });
         })
-
-
     }, [])
+
+    const [state, dispatch] = useReducer(reducer, initialState)
+
     const addToCart = (itemId) => {
         const addedItem = state.products.find(({ id }) => id === itemId)
-        addedItem.numbersOfProduct += 1
-        console.log(addedItem.isAdded, addedItem.numbersOfProduct);
-
-        if (addedItem.isAdded === "false") {
-            axios.post(cart_url, addedItem)
-                .then(function (response) {
-                    console.log(response);
-                })
-        }
-        axios.put(`${cart_url}/${itemId}`, { ...addedItem, "numbersOfProduct": addedItem.numbersOfProduct })
-            .then((response) => {
-                console.log(response);
-            })
-        console.log(addedItem.isAdded);
-        addedItem.isAdded = "true"
+        // addedItem.numbersOfProduct += 1;
+        dispatch_slice(addItem(addedItem));
+        const counts = {};
+        card_items.forEach(item => {
+            counts[item.id] = (counts[item.id] || 0) + 1;
+        });
+        addedItem.numbersOfProduct = counts[addedItem.id]
+        console.log(addedItem);
     }
+
     // console.log(state.products);
 
     return (
-        <Link to={`/${product.slug}`}>
+        <Link>
             <div className='product_card'>
                 <div className='product_normal_image'>
                     <img className=' w-full h-full' src={product.images.normal} alt={product.title} />
