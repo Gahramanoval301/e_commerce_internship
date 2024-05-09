@@ -2,7 +2,8 @@ import axios from 'axios'
 import React, { useEffect, useReducer } from 'react'
 import ProductCard from './productCard';
 import { initialState, reducer, types } from '../../reducer';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAllItems } from '../../slices/CartItemsSlice';
 
 const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products';
 
@@ -14,9 +15,12 @@ export default function Products() {
     const selectedPriceValue = useSelector((state) => state.options.price_value)
     const selectedColorValue = useSelector((state) => state.options.color_value)
 
+    const dispatch_slice = useDispatch()
+
     useEffect(() => {
         axios.get(url).then((res) => {
             dispatch({ type: types.GET_PRODUCTS, payload: res.data[0].products });
+            dispatch_slice(getAllItems(res.data[0].products))
         })
     }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
