@@ -32,7 +32,7 @@ export default function PriceCategory() {
                         onChange={handleCheck}
                     />
                     <span className="checkmark"></span>
-                    <p>$0 - 50</p>
+                    <p>$0 - 30</p>
                 </label>
                 <label htmlFor="">
                     <input
@@ -44,14 +44,14 @@ export default function PriceCategory() {
                         onChange={handleCheck}
                     />
                     <span className="checkmark"></span>
-                    <p>$50 - 70</p>
+                    <p>$30 - 60</p>
                 </label>
                 <label htmlFor="">
                     <input type="radio" id="high_cost" name="price" value="high_cost"
                         checked={selectedOption === 'high_cost'}
                         onChange={handleCheck}/>
                     <span className="checkmark"></span>
-                    <p>$70 - 100</p>
+                    <p>$60 - 100</p>
                 </label>
                 <label htmlFor="">
                     <input
