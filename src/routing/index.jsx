@@ -7,7 +7,7 @@ const WebRouting = () => {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/:slug" element={<ProductSlug />} />
+            <Route path="/product/:slug" element={<ProductSlug />} />
             <Route path="/cart" element={<Cart />} />
         </Routes>
     )
