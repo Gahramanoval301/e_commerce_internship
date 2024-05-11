@@ -75,9 +75,16 @@
     }
 
     .image-frame img {
-        @apply object-contain h-full 
+        @apply object-contain h-full
+    }
+
+    /* cart section styles */
+    .btn-product {
+        @apply border-2 border-primary-darkest rounded-2xl text-pink-600 font-semibold hover:bg-primary-dark hover:border-pink-600 transition duration-300 ease-in
     }
 }
+
+
 
 /* category section vanilla css  */
 .categories label input:checked~.checkmark {
