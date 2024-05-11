@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useReducer } from 'react'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { initialState, reducer, types } from '../../reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { addItem } from '../../slices/CartItemsSlice';
@@ -9,7 +9,7 @@ export default function ProductCard({ product }) {
     const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products'
     const dispatch_slice = useDispatch()
     const card_items = useSelector((state) => state.cartItems.items)
-
+    const navigate = useNavigate()
     //render stars based on their amount
     const renderStars = () => {
         const stars = [];
@@ -40,24 +40,25 @@ export default function ProductCard({ product }) {
         console.log(addedItem);
     }
 
-    // console.log(state.products);
+    //navigate to product slug/page
+    const navigateToProductSlug = () => {
+        navigate(`/product/${product.slug}`);
+    }
 
     return (
-        <Link>
-            <div className='product_card'>
-                <div className='product_normal_image'>
-                    <img className=' w-full h-full' src={product.images.normal} alt={product.title} />
-                </div>
-                <h3 className='capitalize line-clamp-1 text-lg'>{product.title}</h3>
-                <div className='stars'>{renderStars()}</div>
-                <div className='price_icons'>
-                    <p>{product.price}</p>
-                    <div className='icons_box'>
-                        <Link><i className="fa-solid fa-heart hover:rotate-45 hover:text-red-600"></i></Link>
-                        <Link onClick={() => addToCart(product.id)}><i className="fa-solid fa-cart-plus hover:text-primary-darkest hover:scale-105"></i></Link>
-                    </div>
+        <div className='product_card' onClick={navigateToProductSlug}>
+            <div className='product_normal_image'>
+                <img className=' w-full h-full' src={product.images.normal} alt={product.title} />
+            </div>
+            <h3 className='capitalize line-clamp-1 text-lg'>{product.title}</h3>
+            <div className='stars'>{renderStars()}</div>
+            <div className='price_icons'>
+                <p>{product.price}</p>
+                <div className='icons_box'>
+                    <Link><i className="fa-solid fa-heart hover:rotate-45 hover:text-red-600"></i></Link>
+                    <div onClick={(e) => { e.stopPropagation(); addToCart(product.id, e); }}><i className="fa-solid fa-cart-plus hover:text-primary-darkest hover:scale-105"></i></div>
                 </div>
             </div>
-        </Link>
+        </div>
     )
 }
