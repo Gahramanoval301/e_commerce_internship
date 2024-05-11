@@ -25,19 +25,21 @@ export default function Products() {
     }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
 
-    const filteredProducts = state.products.filter(({ sex, category, title, use, color }) => {
+    const filteredProducts = state.products.filter(({ sex, category, title, use, color, priceDegree }) => {
         const sexMatch = !selectedSexValue || sex === selectedSexValue;
         const typeMatch = selectedTypeValue === 'all_category' || category === selectedTypeValue;
         const titleMatch = (!searchText || title.toLowerCase().includes(searchText.toLowerCase()));
         const useMatch = selectedUseValue === 'all_use' || use === selectedUseValue
         const colorMatch = selectedColorValue === 'all_color' || color === selectedColorValue
+        const priceMatch = selectedPriceValue === 'all_price' || priceDegree === selectedPriceValue
 
         if (
             (selectedSexValue === '' || sexMatch) &&
-            (selectedTypeValue === 'all_category' || typeMatch) &&
+            (selectedTypeValue === '' || typeMatch) &&
             (searchText === '' || titleMatch) &&
             (selectedUseValue === '' || useMatch) &&
-            (selectedColorValue === '' || colorMatch) 
+            (selectedColorValue === '' || colorMatch) &&
+            (selectedPriceValue === '' || priceMatch)
         ) {
             return true
         }
@@ -52,7 +54,9 @@ export default function Products() {
         (selectedTypeValue === 'all_category' || selectedTypeValue === '')
         && (searchText === '') &&
         (selectedUseValue === '' || selectedUseValue === 'all_use') &&
-        (selectedColorValue === '' || selectedColorValue === 'all_colors') ? state.products : filteredProducts;
+        (selectedColorValue === '' || selectedColorValue === 'all_colors') &&
+        (selectedPriceValue === '' || selectedPriceValue === 'all_price')
+         ? state.products : filteredProducts;
 
     return (
         <div className='p-5 grid lg:grid-cols-3 xl:grid-cols-4 gap-4'>
