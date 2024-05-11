@@ -26,7 +26,8 @@
             "slug": "mens-service-shoe",
             "isLike": "false",
             "isAdded": "false",
-            "numbersOfProduct": 0
+            "numbersOfProduct": 0,
+            "priceDegree": "normal_cost"
         },
         {
             "id": 2,
@@ -54,7 +55,8 @@
             "slug": "womens-tara-wedge-pump",
             "isLike": "false",
             "isAdded": "false",
-            "numbersOfProduct": 0
+            "numbersOfProduct": 0,
+            "priceDegree": "normal_cost"
         },
         {
             "id": 3,
@@ -82,7 +84,8 @@
             "slug": "womens-loafer-flat",
             "isLike": "false",
             "isAdded": "false",
-            "numbersOfProduct": 0
+            "numbersOfProduct": 0,
+            "priceDegree": "low_cost"
         },
         {
             "id": 4,
@@ -112,7 +115,8 @@
             "slug": "mens-crestwood-waterproof-hiking-shoe",
             "isLike": "false",
             "isAdded": "false",
-            "numbersOfProduct": 0
+            "numbersOfProduct": 0,
+            "priceDegree": "high_cost"
         },
         {
             "id": 5,
@@ -142,7 +146,8 @@
             "slug": "womens-608-v5-cross-trainer",
             "isLike": "false",
             "isAdded": "false",
-            "numbersOfProduct": 0
+            "numbersOfProduct": 0,
+            "priceDegree": "normal_cost"
         }
     ]
 }
