@@ -123,7 +123,7 @@ export default function ProductSlug() {
                                 </div>
                                 <div className='info-section'>
                                     <p>Data First Avaliable:</p>
-                                    <span>{filteredProduct.manufacturer}</span>
+                                    <span>{filteredProduct.dataFirstAvaliable}</span>
                                 </div>
                             </div>
 
