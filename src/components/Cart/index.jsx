@@ -15,20 +15,28 @@ export default function Cart() {
     const card_items = useSelector((state) => state.cartItems.items)
     const all_items = useSelector((state) => state.cartItems.all_items)
     const countsSlice = useSelector((state) => state.cartItems.item_counts)
-    console.log(countsSlice);
 
 
     //navigate to home page automatically
     const continueToShop = () => {
         navigate('/')
     }
+    const getCartItemsFromLocalStorage = () => {
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        setCartItems(storedCartItems);
+    };
+
+    useEffect(() => {
+        // Fetch cart items from local storage when component mounts
+        getCartItemsFromLocalStorage();
+    }, []);
 
     // Function to remove duplicates from card_items
     const [uniqueItems, setUniqueItems] = useState([]);
 
     const removeDuplicates = () => {
         const uniqueItemsMap = new Map();
-        card_items.forEach(cardItem => {
+        cartItems.forEach(cardItem => {
             uniqueItemsMap.set(cardItem.id, cardItem);
         });
         setUniqueItems([...uniqueItemsMap.values()]);
@@ -38,17 +46,17 @@ export default function Cart() {
     // create counts object with useMemo
     const counts = useMemo(() => {
         const countsObj = {};
-        card_items.forEach(item => {
+        cartItems.forEach(item => {
             countsObj[item.id] = (countsObj[item.id] || 0) + 1;
         });
         return countsObj;
-    }, [card_items]);
+    }, [cartItems]);
 
     // Call removeDuplicates when card_items changes
     useEffect(() => {
         removeDuplicates();
         dispatch(setCounts(counts));
-    }, [card_items, dispatch, counts]);
+    }, [cartItems, dispatch, counts]);
 
 
     const calculateTotalPrice = (counts) => {
@@ -92,7 +100,7 @@ export default function Cart() {
                     <div>
                         {uniqueItems.map((cartItem, index) => {
                             return <>
-                                <SingleCardItem key={cartItems.id} item={cartItem} counts={countsSlice} card_items={card_items} />
+                                <SingleCardItem key={cartItems.id} item={cartItem} counts={countsSlice} card_items={cartItems} />
                                 {index !== uniqueItems.length - 1 && <hr className='border-primary-light' />}
                             </>
                         })}
