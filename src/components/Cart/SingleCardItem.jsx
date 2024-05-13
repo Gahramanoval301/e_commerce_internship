@@ -26,10 +26,27 @@ export default function SingleCardItem({ item, counts, card_items }) {
     const increaseCount = (itemId) => {
         setCountsOfItem((prev) => ++prev)
         dispatch(increaseCounts(item.id));
+
+        //add one ocurrence of item to localstorage
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const addedItem = storedCartItems.find(item => item.id === itemId);
+        const newCartItems = [...storedCartItems, addedItem];
+        localStorage.setItem('cart', JSON.stringify(newCartItems));
+
+
     }
     const decreaseCount = (itemId) => {
         setCountsOfItem((prev) => --prev)
         dispatch(decreaseCounts(item.id));
+        //remove one ocurrence of item from localstorage
+        const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const indexToRemove = storedCartItems.findIndex(item => item.id === itemId);
+
+        // If item with itemId exists, remove it from the array
+        if (indexToRemove !== -1) {
+            const newCartItems = [...storedCartItems.slice(0, indexToRemove), ...storedCartItems.slice(indexToRemove + 1)];
+            localStorage.setItem('cart', JSON.stringify(newCartItems));
+        }
 
     }
 
