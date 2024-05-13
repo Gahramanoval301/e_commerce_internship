@@ -1,33 +1,27 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import SingleCardItem from './SingleCardItem';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
+import { setCounts } from '../../slices/CartItemsSlice';
 
 export default function Cart() {
 
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [cartItems, setCartItems] = useState([])
 
     const card_items = useSelector((state) => state.cartItems.items)
     const all_items = useSelector((state) => state.cartItems.all_items)
-
-
-    const counts = {};
-
-    card_items.forEach(item => {
-        counts[item.id] = (counts[item.id] || 0) + 1;
-    });
-    console.log(counts);
-
+    const countsSlice = useSelector((state) => state.cartItems.item_counts)
+    console.log(countsSlice);
 
 
     //navigate to home page automatically
     const continueToShop = () => {
         navigate('/')
     }
-
 
     // Function to remove duplicates from card_items
     const [uniqueItems, setUniqueItems] = useState([]);
@@ -40,10 +34,22 @@ export default function Cart() {
         setUniqueItems([...uniqueItemsMap.values()]);
     };
 
+
+    // create counts object with useMemo
+    const counts = useMemo(() => {
+        const countsObj = {};
+        card_items.forEach(item => {
+            countsObj[item.id] = (countsObj[item.id] || 0) + 1;
+        });
+        return countsObj;
+    }, [card_items]);
+
     // Call removeDuplicates when card_items changes
     useEffect(() => {
         removeDuplicates();
-    }, [card_items]);
+        dispatch(setCounts(counts));
+    }, [card_items, dispatch, counts]);
+
 
     const calculateTotalPrice = (counts) => {
         let price = 0;
@@ -51,13 +57,13 @@ export default function Cart() {
             if (counts.hasOwnProperty(key)) {
                 const myItem = uniqueItems.find(item => item.id === parseInt(key));
                 if (myItem) {
-                    price += counts[key] * (Number(myItem.price.slice(1))).toFixed(2);
+                    price += (Number(counts[key]) * (Number(myItem.price.slice(1))).toFixed(2));
                 }
             }
         }
-        return price;
+        return price.toFixed(2);
     }
-    const totalPrice = calculateTotalPrice(counts)
+    const totalPrice = calculateTotalPrice(countsSlice)
 
     //total items' amount
     const sumObjectValues = (obj) => {
@@ -70,7 +76,7 @@ export default function Cart() {
         return sum;
     }
 
-    const totalSum = sumObjectValues(counts);
+    const totalSum = sumObjectValues(countsSlice);
 
     return (
         <div className='grid grid-cols-10'>
@@ -86,7 +92,7 @@ export default function Cart() {
                     <div>
                         {uniqueItems.map((cartItem, index) => {
                             return <>
-                                <SingleCardItem key={cartItems.id} item={cartItem} counts={counts} card_items={card_items} />
+                                <SingleCardItem key={cartItems.id} item={cartItem} counts={countsSlice} card_items={card_items} />
                                 {index !== uniqueItems.length - 1 && <hr className='border-primary-light' />}
                             </>
                         })}
