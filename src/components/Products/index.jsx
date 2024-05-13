@@ -18,6 +18,9 @@ export default function Products() {
     const dispatch_slice = useDispatch()
 
     useEffect(() => {
+        if (!localStorage.getItem('cart')) {
+            localStorage.setItem('cart', JSON.stringify([]))
+        }
         axios.get(url).then((res) => {
             dispatch({ type: types.GET_PRODUCTS, payload: res.data[0].products });
             dispatch_slice(getAllItems(res.data[0].products))
@@ -56,7 +59,7 @@ export default function Products() {
         (selectedUseValue === '' || selectedUseValue === 'all_use') &&
         (selectedColorValue === '' || selectedColorValue === 'all_colors') &&
         (selectedPriceValue === '' || selectedPriceValue === 'all_price')
-         ? state.products : filteredProducts;
+        ? state.products : filteredProducts;
 
     return (
         <div className='p-5 grid lg:grid-cols-3 xl:grid-cols-4 gap-4'>
