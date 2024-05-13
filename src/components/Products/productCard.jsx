@@ -30,14 +30,16 @@ export default function ProductCard({ product }) {
 
     const addToCart = (itemId) => {
         const addedItem = state.products.find(({ id }) => id === itemId)
-        // addedItem.numbersOfProduct += 1;
         dispatch_slice(addItem(addedItem));
         const counts = {};
         card_items.forEach(item => {
             counts[item.id] = (counts[item.id] || 0) + 1;
         });
-        addedItem.numbersOfProduct = counts[addedItem.id]
         console.log(addedItem);
+        //local storage
+        const existingCartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        const updatedCartItems = [...existingCartItems, addedItem];
+        localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     }
 
     //navigate to product slug/page
