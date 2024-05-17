@@ -2,9 +2,16 @@ import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateSearchedText } from '../../slices/OptionCategorySlice';
 import { Link } from 'react-router-dom';
+import { TfiMenuAlt } from "react-icons/tfi";
+import Category from '../Category';
+import SexCategory from '../Category/sex_category';
+import TypeCategory from '../Category/type_category';
+import UseCategory from '../Category/use_category';
+import PriceCategory from '../Category/price_category';
 
 export default function Header() {
     const [searchedValue, setSearchedValue] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
 
     const dispatch = useDispatch();
 
@@ -14,12 +21,17 @@ export default function Header() {
         dispatch(updateSearchedText(event.target.value));
     }
 
+    const handleClick = () => {
+        setIsClicked((prev) => !prev);
+        console.log(isClicked);
+    }
+
     return (
-        <header className='w-full fixed bg-secondary-light shadow-md z-50'>
-            <div className='flex justify-between items-center p-8'>
-                <h1 className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></h1>
-                <div className='w-3/5 border-2 p-2 border-primary-dark'>
-                    <input className='w-11/12 outline-none bg-transparent tracking-wide' type="text"
+        <header className='w-full fixed bg-secondary-light shadow-md z-50 '>
+            <div className='flex justify-between items-center p-8 relative'>
+                <a href='/' className='hidden sm:block font-bold text-2xl sm:text-3xl md:tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
+                <div className='w-4/5 md:w-2/5 lg:w-3/5 border-2 p-2 border-primary-dark'>
+                    <input className='w-10/12 sm:w-9/12 md:w-10/12 lg:w-11/12 outline-none bg-transparent lg:tracking-wide text-sm' type="text"
                         placeholder='Enter your product name...'
                         value={searchedValue}
                         onChange={handleChange}
@@ -28,11 +40,26 @@ export default function Header() {
                         <i className="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
-                <div className='flex gap-5 justify-start items-center mr-5'>
-                    <Link className='text-2xl'>
-                        <i className="fa-regular fa-heart"></i>
+                <>
+                    <div className='sm:hidden dropdown-menu-box border-2' >
+                        <button onClick={handleClick} >
+                            <TfiMenuAlt className='text-xl cursor-pointer' />
+                        </button>
+
+                        <div className={`dropdown-menu ${isClicked ? 'open' : ''}`}>
+                            <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
+                                <div className='dropdown-content '>
+                                    <Category />
+                                </div>
+                        </div>
+                    </div>
+
+                </>
+                <div className='hidden sm:flex gap-2 md:gap-5 justify-start items-center mr-5'>
+                    <Link className='text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                        <i className="fa-regular fa-heart "></i>
                     </Link>
-                    <Link className='text-2xl' to='/cart'>
+                    <Link className='text-xl md:text-2xl  hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
                         <i className="fa-solid fa-cart-shopping"></i>
                     </Link>
                 </div>
