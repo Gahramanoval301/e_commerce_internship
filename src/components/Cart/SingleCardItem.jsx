@@ -52,7 +52,7 @@ export default function SingleCardItem({ item, counts, card_items }) {
 
     return (
         countsOfItem === 0 ? null :
-            <div className='grid grid-cols-10 place-items-center mb-5 p-4'>
+            <div onClick={navigateToProductSlug} className='grid grid-cols-10 place-items-center mb-5 p-4 hover:bg-slate-50 transition duration-300 ease-out cursor-pointer'>
                 <div className='col-span-4 flex gap-2 mt-5 '>
                     <div className='w-44 h-44 flex justify-start items-center'>
                         <img src={item.images.normal} alt={item.title} />
@@ -65,11 +65,11 @@ export default function SingleCardItem({ item, counts, card_items }) {
                         <div>
                             <div className='info-section'>
                                 <p>Color:</p>
-                                <span>{item.color}</span>
+                                <span className='capitalize'>{item.color}</span>
                             </div>
                             <div className='info-section'>
                                 <p>Material:</p>
-                                <span>{item.material}</span>
+                                <span className='capitalize'>{item.material}</span>
                             </div>
                             {/* Render count only if it's greater than 1 */}
 
@@ -79,10 +79,10 @@ export default function SingleCardItem({ item, counts, card_items }) {
                 <div className='col-span-2'>
                     <p>{item.price}</p>
                 </div>
-                <div className='col-span-2'>
-                    <button onClick={() => increaseCount(item.id)}>+</button>
+                <div className='col-span-2 flex flex-col justify-center items-center gap-1'>
+                    <button className='button_count' onClick={(e) => { e.stopPropagation(), increaseCount(item.id) }}>+</button>
                     <p>{countsOfItem}</p>
-                    <button onClick={() => decreaseCount(item.id)}>-</button>
+                    <button className='button_count' onClick={(e) => { e.stopPropagation(), decreaseCount(item.id) }}>-</button>
 
                 </div>
                 <div className='col-span-2'>
