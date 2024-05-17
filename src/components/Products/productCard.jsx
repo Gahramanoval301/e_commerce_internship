@@ -48,7 +48,7 @@ export default function ProductCard({ product }) {
     }
 
     return (
-        <div className='product_card' onClick={navigateToProductSlug}>
+        <div className='product_card cursor-pointer ' onClick={navigateToProductSlug}>
             <div className='product_normal_image'>
                 <img className=' w-full h-full' src={product.images.normal} alt={product.title} />
             </div>
