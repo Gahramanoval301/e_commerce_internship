@@ -63,7 +63,7 @@ export default function Products() {
 
     return (
 
-        <div className=' p-5 grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
+        <div className='my-14 sm:my-1 p-5 grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
             {myProducts.map((product) => {
                 return (
                     <div key={product.id}>
