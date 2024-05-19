@@ -23,7 +23,6 @@ export default function Header() {
 
     const handleClick = () => {
         setIsClicked((prev) => !prev);
-        console.log(isClicked);
     }
 
     return (
@@ -41,26 +40,42 @@ export default function Header() {
                     </button>
                 </div>
                 <>
-                    <div className='sm:hidden dropdown-menu-box border-2' >
+                    <div className='sm:hidden dropdown-menu-box' >
                         <button onClick={handleClick} >
                             <TfiMenuAlt className='text-xl cursor-pointer' />
                         </button>
 
                         <div className={`dropdown-menu ${isClicked ? 'open' : ''}`}>
-                            <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
-                                <div className='dropdown-content '>
-                                    <Category />
+                            <div className='flex px-5 justify-between items-center'>
+                                <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
+                                <div className='flex gap-2 md:gap-5 justify-start items-center relative z-50 '>
+                                    <Link className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                                        <i className="fa-regular fa-heart "></i>
+                                        <div className='text-box-mob'>Go to favourites</div>
+
+                                    </Link>
+                                    <Link className='icon-text text-xl md:text-2xl hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
+                                        <i className="fa-solid fa-cart-shopping"></i>
+                                        <div className='text-box-mob '>Go to cart</div>
+
+                                    </Link>
                                 </div>
+                            </div>
+                            <div className='dropdown-content '>
+                                <Category />
+                            </div>
                         </div>
                     </div>
 
                 </>
-                <div className='hidden sm:flex gap-2 md:gap-5 justify-start items-center mr-5'>
-                    <Link className='text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                <div className='hidden sm:flex gap-2 md:gap-5 justify-start items-center sm:ml-5 md:ml-0 md:mr-5'>
+                    <Link className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
                         <i className="fa-regular fa-heart "></i>
+                        <div className='text-box absolute'>G o to favourites</div>
                     </Link>
-                    <Link className='text-xl md:text-2xl  hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
+                    <Link className='icon-text text-xl md:text-2xl  hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
                         <i className="fa-solid fa-cart-shopping"></i>
+                        <div className='text-box'>Go to cart</div>
                     </Link>
                 </div>
             </div >
