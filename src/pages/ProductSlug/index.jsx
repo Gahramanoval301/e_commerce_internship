@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import { initialState, reducer, types } from '../../reducer';
 import axios from 'axios';
 import Header from '../../components/Header';
+import { Link } from 'react-router-dom';
 
 export default function ProductSlug() {
     const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products';
@@ -38,21 +39,24 @@ export default function ProductSlug() {
     // Filter product only if state has been initialized and not loading
     return (
         <div>
+            <div className='fixed bottom-5 right-5 z-50 bg-red-500 p-2 text-blue-200 font-semibold hover:bg-red-600'>
+                <Link to='/'>Continue to shopping</Link>
+            </div>
             <Header />
-            <div className='relative top-[115px] flex flex-col gap-5 p-5'>
+            <div className='relative top-[210px] sm:top-[150px] md:top-[115px] flex flex-col gap-5 p-5'>
                 {!loading && filteredProduct ? (
                     <>
-                        <div className='grid grid-cols-3'>
+                        <div className='grid sm:grid-cols-3'>
                             <div className='col-span-2'>
-                                <div className='relative m-5 border-r-2 border-primary-light px-5'>
-                                    <div className=' '>
-                                        {imageUrl ? (<img src={imageUrl} alt="" />) :
+                                <div className='relative m-5 sm:border-r-2 sm:border-primary-light px-5 max-[640px]:mb-16'>
+                                    <div className=''>
+                                        {imageUrl ? (<img src={imageUrl} alt="" className='w-full lg:scale-[0.85]' />) :
                                             (
                                                 <img src={filteredProduct.images.normal} alt="" />
                                             )
                                         }
                                     </div>
-                                    <div className='absolute left-0 top-0 flex flex-col gap-2 max-w-20 z-30'>
+                                    <div className='absolute -left-5 sm:left-0 -top-10 sm:top-0 grid grid-cols-4 sm:flex sm:flex-col gap-20 sm:gap-2 max-w-20 z-30'>
                                         <div className='image-frame'>
                                             <img src={filteredProduct.images.normal} alt="" onClick={handleClick} />
                                         </div>
@@ -70,8 +74,8 @@ export default function ProductSlug() {
                             </div>
                             <div className='col-span-1 info-box gap-3'>
                                 <h2 className='text-3xl capitalize font-bold tracking-widest'>{filteredProduct.title}</h2>
-                                <div className='flex gap-7 mb-5'>
-                                    <div className='stars'>{renderStars()}</div>
+                                <div className='flex items-center gap-7 mb-5'>
+                                    <div className='stars sm:text-sm md:text-base 2xl:text-lg'>{renderStars()}</div>
                                     <div className='info-section'>
                                         <span>Price:</span>
                                         <p>{filteredProduct.price}</p>
