@@ -52,10 +52,10 @@ export default function SingleCardItem({ item, counts, card_items }) {
 
     return (
         countsOfItem === 0 ? null :
-            <div onClick={navigateToProductSlug} className='grid grid-cols-10 place-items-center mb-5 p-4 hover:bg-slate-50 transition duration-300 ease-out cursor-pointer'>
-                <div className='col-span-4 flex gap-2 mt-5 '>
-                    <div className='w-44 h-44 flex justify-start items-center'>
-                        <img src={item.images.normal} alt={item.title} />
+            <div onClick={navigateToProductSlug} className='grid grid-cols-4 max-[540px]:px-8 max-[640px]:px-20 gap-10 sm:gap-0 sm:grid-cols-10 place-content-between sm:place-items-center sm:place-content-stretch mb-5 sm:pl-16 md:pl-10 p-4 hover:bg-slate-50 transition duration-300 ease-out cursor-pointer'>
+                <div className='col-span-4 flex gap-10 sm:gap-2 mt-5 max-[480px]:flex-wrap max-[480px]:justify-center max-[480px]:gap-3 '>
+                    <div className='w-44 h-44 flex justify-start items-center scale-125 sm:scale-100'>
+                        <img  src={item.images.normal} alt={item.title} />
                     </div>
                     <div className='flex flex-col justify-between ml-3 py-3'>
                         <div>
@@ -77,15 +77,18 @@ export default function SingleCardItem({ item, counts, card_items }) {
                     </div>
                 </div>
                 <div className='col-span-2'>
+                    <h1 className='head-sections-mob'>Price:</h1>
                     <p>{item.price}</p>
                 </div>
                 <div className='col-span-2 flex flex-col justify-center items-center gap-1'>
+                    <h1 className='head-sections-mob'>Quantity:</h1>
                     <button className='button_count' onClick={(e) => { e.stopPropagation(), increaseCount(item.id) }}>+</button>
                     <p>{countsOfItem}</p>
                     <button className='button_count' onClick={(e) => { e.stopPropagation(), decreaseCount(item.id) }}>-</button>
 
                 </div>
-                <div className='col-span-2'>
+                <div className='col-span-4 sm:col-span-2 place-self-center'>
+                    <h1 className='head-sections-mob'>Total Price:</h1>
                     ${calculateTotalPrice()}
                 </div>
             </div>
