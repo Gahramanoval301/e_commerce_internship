@@ -71,11 +71,11 @@
     }
 
     .image-frame {
-        @apply w-16 h-16 border-2 border-primary-darkest p-1 cursor-pointer bg-white opacity-25 hover:opacity-100
+        @apply w-16 h-16 border-2 border-primary-darkest p-1 cursor-pointer bg-white opacity-25 hover:opacity-100 
     }
 
     .image-frame img {
-        @apply object-contain h-full
+        @apply object-contain h-full  
     }
 
     /* cart section styles */
@@ -105,8 +105,28 @@
         @apply opacity-100 -translate-y-0
     }
 
-}
+    /* text-box style */
+    .text-box {
+        @apply absolute w-16 hidden border-[1px] border-gray-500 bg-orange-100 text-xs text-black p-[2px] bottom-[70%] left-[60%]
+    }
 
+    .text-box-mob {
+        @apply absolute w-16 hidden border-[1px] border-gray-500 bg-pink-100 text-xs text-black p-[2px] bottom-0 left-0
+    }
+
+    .icon-text {
+        @apply relative
+    }
+
+    .icon-text:hover .text-box, .icon-text:hover .text-box-mob {
+        @apply block
+    }
+
+    /* style of heading of cart item sections */
+    .head-sections-mob{
+        @apply sm:hidden block font-bold tracking-wide mb-3 
+    }
+}
 
 
 /* category section vanilla css  */
