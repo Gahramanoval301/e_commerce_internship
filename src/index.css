@@ -57,7 +57,9 @@
     .info-section {
         @apply flex gap-3
     }
-
+.info-section span{
+    @apply capitalize
+}
     .info-section p {
         @apply font-semibold
     }
