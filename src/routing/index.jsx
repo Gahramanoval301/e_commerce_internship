@@ -1,10 +1,11 @@
 import { Route, Routes } from "react-router"
 import Home from "../pages/home"
 import ProductSlug from "../pages/ProductSlug"
-// import Cart from "../components/Cart"
-
+import Loading from "../components/Loading"
 import { lazy, Suspense } from "react"
+
 const Cart = lazy(() => import("../components/Cart"))
+const Favourites = lazy(() => import("../components/Favourites"))
 
 const WebRouting = () => {
     return (
@@ -14,6 +15,11 @@ const WebRouting = () => {
             <Route path="/cart" element={
                 <Suspense fallback={<div>salam</div>}>
                     <Cart />
+                </Suspense>
+            } />
+            <Route path="/favourites" element={
+                <Suspense fallback={<Loading />}>
+                    <Favourites />
                 </Suspense>
             } />
         </Routes>
