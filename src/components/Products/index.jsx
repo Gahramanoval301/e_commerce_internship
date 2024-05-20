@@ -1,9 +1,10 @@
 import axios from 'axios'
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import ProductCard from './productCard';
 import { initialState, reducer, types } from '../../reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllItems } from '../../slices/CartItemsSlice';
+import Skeleton from 'react-loading-skeleton';
 
 const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products';
 
@@ -14,6 +15,7 @@ export default function Products() {
     const selectedUseValue = useSelector((state) => state.options.use_value)
     const selectedPriceValue = useSelector((state) => state.options.price_value)
     const selectedColorValue = useSelector((state) => state.options.color_value)
+    const [loading, setLoading] = useState(true)
 
     const dispatch_slice = useDispatch()
 
@@ -24,6 +26,7 @@ export default function Products() {
         axios.get(url).then((res) => {
             dispatch({ type: types.GET_PRODUCTS, payload: res.data[0].products });
             dispatch_slice(getAllItems(res.data[0].products))
+            setLoading(false);
         })
     }, [])
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -64,13 +67,15 @@ export default function Products() {
     return (
 
         <div className='my-14 sm:my-1 p-5 grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4'>
-            {myProducts.map((product) => {
-                return (
-                    <div key={product.id}>
-                        <ProductCard product={product} />
-                    </div>
-                )
-            })}
+                {loading? (<p>Loading...</p>) :
+                    myProducts.map((product) => {
+                        return (
+                            <div key={product.id}>
+                                <ProductCard product={product} />
+                            </div>
+                        )
+                    })
+                }
         </div>
     )
 }
