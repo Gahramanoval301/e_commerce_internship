@@ -1,20 +1,15 @@
 import React, { useState } from 'react'
 import { useDispatch } from 'react-redux';
 import { updateSearchedText } from '../../slices/OptionCategorySlice';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { TfiMenuAlt } from "react-icons/tfi";
 import Category from '../Category';
-import SexCategory from '../Category/sex_category';
-import TypeCategory from '../Category/type_category';
-import UseCategory from '../Category/use_category';
-import PriceCategory from '../Category/price_category';
 
 export default function Header() {
     const [searchedValue, setSearchedValue] = useState('');
     const [isClicked, setIsClicked] = useState(false);
 
     const dispatch = useDispatch();
-
     const handleChange = (event) => {
         setSearchedValue(event.target.value)
 
@@ -24,7 +19,7 @@ export default function Header() {
     const handleClick = () => {
         setIsClicked((prev) => !prev);
     }
-
+   
     return (
         <header className='w-full fixed bg-secondary-light shadow-md z-50 '>
             <div className='flex justify-between items-center p-8 relative'>
@@ -49,10 +44,9 @@ export default function Header() {
                             <div className='flex px-5 justify-between items-center'>
                                 <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
                                 <div className='flex gap-2 md:gap-5 justify-start items-center relative z-50 '>
-                                    <Link className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                                    <Link to={'/favourites'} className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
                                         <i className="fa-regular fa-heart "></i>
                                         <div className='text-box-mob'>Go to favourites</div>
-
                                     </Link>
                                     <Link className='icon-text text-xl md:text-2xl hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
                                         <i className="fa-solid fa-cart-shopping"></i>
@@ -69,9 +63,9 @@ export default function Header() {
 
                 </>
                 <div className='hidden sm:flex gap-2 md:gap-5 justify-start items-center sm:ml-5 md:ml-0 md:mr-5'>
-                    <Link className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                    <Link to={'/favourites'} className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
                         <i className="fa-regular fa-heart "></i>
-                        <div className='text-box absolute'>G o to favourites</div>
+                        <div className='text-box absolute'>Go to favourites</div>
                     </Link>
                     <Link className='icon-text text-xl md:text-2xl  hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
                         <i className="fa-solid fa-cart-shopping"></i>
