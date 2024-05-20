@@ -7,7 +7,7 @@ import { setCounts } from '../../slices/CartItemsSlice';
 import Header from '../Header';
 import { Link } from 'react-router-dom';
 
-export default function Cart() {
+export function Cart() {
 
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -138,3 +138,4 @@ export default function Cart() {
 
     )
 }
+export default Cart
