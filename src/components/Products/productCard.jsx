@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { useEffect, useReducer } from 'react'
+import React, { useEffect, useReducer, useState } from 'react'
 import { Link, useNavigate } from "react-router-dom";
 import { initialState, reducer, types } from '../../reducer';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +10,7 @@ export default function ProductCard({ product }) {
     const dispatch_slice = useDispatch()
     const card_items = useSelector((state) => state.cartItems.items)
     const navigate = useNavigate()
+    const [imageLoaded, setImageLoaded] = useState(false);
     //render stars based on their amount
     const renderStars = () => {
         const stars = [];
@@ -46,11 +47,15 @@ export default function ProductCard({ product }) {
     const navigateToProductSlug = () => {
         navigate(`/product/${product.slug}`);
     }
+    const handleImageLoad = () => {
+        setImageLoaded(true);
+    }
 
     return (
         <div className='product_card cursor-pointer ' onClick={navigateToProductSlug}>
             <div className='product_normal_image'>
-                <img className=' w-full h-full' src={product.images.normal} alt={product.title} />
+                <img className='w-full h-full' src={product.images.normal} alt={product.title} onLoad={handleImageLoad} style={{ display: imageLoaded ? 'block' : 'none' }} />
+                <div className='w-full h-full border-2 border-red-600 bg-red-400 animate-pulse' style={{ display: imageLoaded ? 'none' : 'block' }} />
             </div>
             <h3 className='capitalize line-clamp-1 text-lg'>{product.title}</h3>
             <div className='stars'>{renderStars()}</div>
