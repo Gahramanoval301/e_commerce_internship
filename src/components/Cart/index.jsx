@@ -1,14 +1,11 @@
-import axios from 'axios';
 import React, { useEffect, useMemo, useState } from 'react'
 import SingleCardItem from './SingleCardItem';
 import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCounts } from '../../slices/CartItemsSlice';
 import Header from '../Header';
-import { Link } from 'react-router-dom';
 
 export function Cart() {
-
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
@@ -23,13 +20,13 @@ export function Cart() {
     const continueToShop = () => {
         navigate('/')
     }
+
+    // Fetch cart items from local storage when component mounts
     const getCartItemsFromLocalStorage = () => {
         const storedCartItems = JSON.parse(localStorage.getItem('cart')) || [];
         setCartItems(storedCartItems);
     };
-
     useEffect(() => {
-        // Fetch cart items from local storage when component mounts
         getCartItemsFromLocalStorage();
     }, []);
 
@@ -45,7 +42,7 @@ export function Cart() {
     };
 
 
-    // create counts object with useMemo
+    // create counts object with useMemo to remove some unuseful renders
     const counts = useMemo(() => {
         const countsObj = {};
         cartItems.forEach(item => {
@@ -61,6 +58,7 @@ export function Cart() {
     }, [cartItems, dispatch, counts]);
 
 
+    //calculate Total Pirce of products
     const calculateTotalPrice = (counts) => {
         let price = 0;
         for (const key in counts) {
