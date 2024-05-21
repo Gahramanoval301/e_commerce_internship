@@ -4,7 +4,6 @@ import ProductCard from './productCard';
 import { initialState, reducer, types } from '../../reducer';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAllItems } from '../../slices/CartItemsSlice';
-import Skeleton from 'react-loading-skeleton';
 
 const url = 'https://65217450a4199548356d3a5c.mockapi.io/api/v1/products';
 
@@ -20,9 +19,16 @@ export default function Products() {
     const dispatch_slice = useDispatch()
 
     useEffect(() => {
+        //set local storage for cart items
         if (!localStorage.getItem('cart')) {
             localStorage.setItem('cart', JSON.stringify([]))
         }
+
+        //set local storage for favourites items
+        if (!localStorage.getItem('favourites')) {
+            localStorage.setItem('favourites', JSON.stringify([]));
+        }
+
         axios.get(url).then((res) => {
             dispatch({ type: types.GET_PRODUCTS, payload: res.data[0].products });
             dispatch_slice(getAllItems(res.data[0].products))
