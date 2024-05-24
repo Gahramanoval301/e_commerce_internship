@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCounts } from '../../slices/CartItemsSlice';
 import Header from '../Header';
+import { Link } from 'react-router-dom';
 
 export function Cart() {
     const navigate = useNavigate();
@@ -14,6 +15,14 @@ export function Cart() {
     const card_items = useSelector((state) => state.cartItems.items)
     const all_items = useSelector((state) => state.cartItems.all_items)
     const countsSlice = useSelector((state) => state.cartItems.item_counts)
+
+    // define filter cases 
+    const searchText = useSelector((state) => state.options.searched_text);
+    const selectedSexValue = useSelector((state) => state.options.sex_value);
+    const selectedTypeValue = useSelector((state) => state.options.type_value);
+    const selectedUseValue = useSelector((state) => state.options.use_value);
+    const selectedPriceValue = useSelector((state) => state.options.price_value);
+    const selectedColorValue = useSelector((state) => state.options.color_value);
 
 
     //navigate to home page automatically
@@ -86,12 +95,59 @@ export function Cart() {
 
     const totalSum = sumObjectValues(countsSlice);
 
+    //return products which specify specific filters
+    const filteredProducts = uniqueItems.filter(
+        ({ sex, category, title, use, color, priceDegree }) => {
+            const sexMatch = !selectedSexValue || sex === selectedSexValue;
+            const typeMatch =
+                selectedTypeValue === "all_category" || category === selectedTypeValue;
+            const titleMatch =
+                !searchText || title.toLowerCase().includes(searchText.toLowerCase());
+            const useMatch =
+                selectedUseValue === "all_use" || use === selectedUseValue;
+            const colorMatch =
+                selectedColorValue === "all_color" || color === selectedColorValue;
+            const priceMatch =
+                selectedPriceValue === "all_price" ||
+                priceDegree === selectedPriceValue;
+
+            if (
+                (selectedSexValue === "" || sexMatch) &&
+                (selectedTypeValue === "" || typeMatch) &&
+                (searchText === "" || titleMatch) &&
+                (selectedUseValue === "" || useMatch) &&
+                (selectedColorValue === "" || colorMatch) &&
+                (selectedPriceValue === "" || priceMatch)
+            ) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    );
+    const myProducts =
+        selectedSexValue === "" &&
+            (selectedTypeValue === "all_category" || selectedTypeValue === "") &&
+            searchText === "" &&
+            (selectedUseValue === "" || selectedUseValue === "all_use") &&
+            (selectedColorValue === "" || selectedColorValue === "all_colors") &&
+            (selectedPriceValue === "" || selectedPriceValue === "all_price")
+            ? uniqueItems
+            : filteredProducts;
+
+
     return (
         <>
+            <div className='fixed md:bottom-5 md:right-5 z-50 bg-red-500 p-2 text-blue-200 font-semibold hover:bg-red-600'>
+                <Link to='/'>Continue to shopping</Link>
+            </div>
             <Header />
-            <div className='grid lg:grid-cols-10 translate-y-44 sm:translate-y-32 md:translate-y-28 pb-10'>
+            <div className='grid lg:grid-cols-10 translate-y-44 md:translate-y-32 lg:translate-y-28 pb-10'>
                 <div className='col-span-8 pr-5'>
-                    <h1 className='m-5 font-bold text-3xl tracking-wider'>Shopping Bag</h1>
+                    <div className='box-navigate'>
+                        <h1 className='m-5 font-bold text-3xl tracking-wider'>Shopping Bag</h1>
+                        <a href="/">Back to Home</a>
+                    </div>
                     <div className='m-5 mr-1 border-2 border-secondary-dark rounded-lg shadow-xl '>
                         <div className='hidden sm:grid sm:grid-cols-10 place-items-center p-3 bg-primary-light rounded-t-lg shadow-md font-semibold '>
                             <h1 className='col-span-4 '>Product</h1>
@@ -100,7 +156,7 @@ export function Cart() {
                             <h1 className='col-span-2 '>Total Price</h1>
                         </div>
                         <div>
-                            {uniqueItems.map((cartItem, index) => {
+                            {myProducts.map((cartItem, index) => {
                                 return <>
                                     <SingleCardItem key={cartItems.id} item={cartItem} counts={countsSlice} card_items={cartItems} />
                                     {index !== uniqueItems.length - 1 && <hr className='border-primary-light' />}
