@@ -19,13 +19,13 @@ export default function Header() {
     const handleClick = () => {
         setIsClicked((prev) => !prev);
     }
-   
+
     return (
         <header className='w-full fixed bg-secondary-light shadow-md z-50 '>
             <div className='flex justify-between items-center p-8 relative'>
-                <a href='/' className='hidden sm:block font-bold text-2xl sm:text-3xl md:tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
+                <a href='/' className='hidden md:block font-bold text-2xl sm:text-3xl md:tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
                 <div className='w-4/5 md:w-2/5 lg:w-3/5 border-2 p-2 border-primary-dark'>
-                    <input className='w-10/12 sm:w-9/12 md:w-10/12 lg:w-11/12 outline-none bg-transparent lg:tracking-wide text-sm' type="text"
+                    <input className='max-[370px]:w-8/12 w-10/12 sm:w-9/12 md:w-10/12 lg:w-11/12 outline-none bg-transparent lg:tracking-wide text-sm' type="text"
                         placeholder='Enter your product name...'
                         value={searchedValue}
                         onChange={handleChange}
@@ -35,24 +35,27 @@ export default function Header() {
                     </button>
                 </div>
                 <>
-                    <div className='sm:hidden dropdown-menu-box' >
+                    <div className='md:hidden dropdown-menu-box' >
                         <button onClick={handleClick} >
                             <TfiMenuAlt className='text-xl cursor-pointer' />
                         </button>
 
-                        <div className={`dropdown-menu ${isClicked ? 'open' : ''}`}>
-                            <div className='flex px-5 justify-between items-center'>
-                                <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
-                                <div className='flex gap-2 md:gap-5 justify-start items-center relative z-50 '>
-                                    <Link to={'/favourites'} className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
-                                        <i className="fa-regular fa-heart "></i>
-                                        <div className='text-box-mob'>Go to favourites</div>
-                                    </Link>
-                                    <Link className='icon-text text-xl md:text-2xl hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
-                                        <i className="fa-solid fa-cart-shopping"></i>
-                                        <div className='text-box-mob '>Go to cart</div>
+                        <div className={`text-sm dropdown-menu ${isClicked ? 'open' : ''}`}>
+                            <p className='font-bold text-3xl tracking-wide drop-shadow-lg cursor-pointer relative z-50' onClick={handleClick}>Filter <span className='text-primary-darkest'>Products</span></p>
+                            <div className='fixed z-50 bg-[#fcd7d7] bottom-0 p-1 w-full'>
+                                <div className='flex px-5 justify-between items-center '>
+                                    <a href='/' className='font-bold text-3xl tracking-wide drop-shadow-lg'>Leman <span className='text-primary-dark'>Shoes</span></a>
+                                    <div className='flex gap-2 md:gap-5 justify-start items-center relative z-50 '>
+                                        <Link to={'/favourites'} className='icon-text text-xl md:text-2xl hover:text-red-500 transition duration-300 hover:scale-105'>
+                                            <i className="fa-regular fa-heart "></i>
+                                            <div className='text-box-mob'>Go to favourites</div>
+                                        </Link>
+                                        <Link className='icon-text text-xl md:text-2xl hover:text-primary-dark transition duration-300 hover:scale-105' to='/cart'>
+                                            <i className="fa-solid fa-cart-shopping"></i>
+                                            <div className='text-box-mob '>Go to cart</div>
 
-                                    </Link>
+                                        </Link>
+                                    </div>
                                 </div>
                             </div>
                             <div className='dropdown-content '>
