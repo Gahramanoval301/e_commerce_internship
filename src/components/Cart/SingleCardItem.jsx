@@ -9,8 +9,6 @@ export default function SingleCardItem({ item, counts, card_items }) {
     const dispatch = useDispatch();
 
     const [countsOfItem, setCountsOfItem] = useState(counts[item.id])
-    console.log(countsOfItem);
-
 
     //calculateTotalPrice
     const calculateTotalPrice = () => {
