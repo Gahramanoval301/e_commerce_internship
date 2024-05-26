@@ -252,13 +252,13 @@
     .footer-pv-info-box a{
         @apply flex items-center gap-4 mt-2
     }
-    .footer-pv-info-box a:hover .footer-icon-1{
+    .footer-pv-info-box a:hover .footer-icon-box, .footer-about a:hover .footer-icon-box {
         @apply bg-indigo-200 
     }
     .footer-pv-info-box a p{
         @apply font-semibold
     }
-    .footer-pv-info-box .footer-icon-1{
+    .footer-icon-box{
         @apply p-2 rounded-full bg-pink-200 transition duration-300
     }
     .footer-icon{
