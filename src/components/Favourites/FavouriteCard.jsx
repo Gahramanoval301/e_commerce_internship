@@ -56,7 +56,6 @@ export default function FavouriteCard({ item, uniqueFavourites, setIsDeletedFrom
                     }
 
                     setIsFavourite(false)
-                    console.log(isFavourite);
                 Swal.fire({
                     timer: 1000,
                     text: 'This item is removed from your favorites list',

@@ -19,14 +19,11 @@ const Favourites = () => {
   const [isLoading, setIsLoading] = useState(true);
 
 
-  console.log(favourited_items);
 
   useEffect(() => {
     //fetch stored items from local storage
     const storedFavouritesLocal = JSON.parse(localStorage.getItem('favourites')) || [];
     setStoredFavourites(storedFavouritesLocal)
-    console.log(searchText);
-
   }, [])
 
 
@@ -99,7 +96,7 @@ const Favourites = () => {
       <Header />
       {isLoading ? (<Loading />) :
         (
-          <div className='p-5 lg:p-8 translate-y-44 md:translate-y-36 lg:translate-y-28'>
+          <div className='p-5 lg:p-8 translate-y-44 md:translate-y-36 lg:translate-y-28 max-[768px]:pb-20'>
             <div
               className={`state-delete  ${isDeletedFromFavourite ? "active" : ""}`}
               onClick={ReloadPage}
