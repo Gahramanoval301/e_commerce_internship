@@ -86,7 +86,7 @@ export default function Products() {
       : filteredProducts;
 
   return (
-    <div className="max-[769px]:translate-y-24 sm:my-1 p-5 grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+    <div className="max-[769px]:translate-y-24 sm:my-1 p-5 grid place-content-center md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 max-[768px]:pb-20 max-[768px]:pt-0">
       {loading ? (
         <p>Loading...</p>
       ) : (
