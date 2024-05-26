@@ -59,7 +59,6 @@ export default function ProductCard({ product, setIsAddedToFavourite }) {
         card_items.forEach((item) => {
             counts[item.id] = (counts[item.id] || 0) + 1;
         });
-        console.log(addedItem);
         //local storage
         const existingCartItems = JSON.parse(localStorage.getItem("cart")) || [];
         const updatedCartItems = [...existingCartItems, addedItem];
@@ -97,9 +96,7 @@ export default function ProductCard({ product, setIsAddedToFavourite }) {
     };
     //check if your products is exists inside of favourite products then change state.
     useEffect(() => {
-        console.log(storedFavourites);
         const result = storedFavourites.find((item) => item.id === product.id);
-        console.log(Boolean(result));
         setIsFavourite(Boolean(result));
     }, [storedFavourites]);
     return (
