@@ -21,19 +21,19 @@ export default function Footer() {
       <div className="grid grid-cols-2 gap-8">
         <div className="footer-pv-info-box">
           <Link to="https://maps.app.goo.gl/MG3hHjz6H9C7xDG8A" target="_blank">
-            <div className="footer-icon-1">
+            <div className="footer-icon-box">
               <FaLocationDot className="footer-icon" />
             </div>
             <p>Azerbaijan, Baku</p>
           </Link>
           <Link to="tel:+994513106096" target='_blank'>
-            <div className="footer-icon-1">
+            <div className="footer-icon-box">
               <BsFillTelephoneFill className="footer-icon" />
             </div>
             <p>+994 51 310 60 96</p>
           </Link>
           <Link to="mailto:gahramanovalamann@gmail.com" target='_blank'>
-            <div className="footer-icon-1">
+            <div className="footer-icon-box">
               <SiGmail className="footer-icon" />
             </div>
             <p>gahramanovalamann@gmail.com</p>
@@ -48,17 +48,18 @@ export default function Footer() {
             and I utilize localhost as a mini-database. This is my mini frontend
             e-commerce shoe website.{" "}
           </p>
-          <div className="flex gap-3">
-            <a href="https://github.com/Gahramanoval301" target='_blank' className="relative z-50">
-              <div className="p-2 bg-pink-200">
+          <div className="flex gap-3 justify-center">
+            <Link to="https://github.com/Gahramanoval301" target='_blank'>
+              <div className="footer-icon-box">
                 <FaGithub className="footer-icon" />
               </div>
-            </a>
-            <a href="https://www.linkedin.com/in/leman-gahramanova-0a3b6b2a5" target='_blank'>
-              <div className="footer-icon-2">
+            </Link>
+            <Link to="https://www.linkedin.com/in/leman-gahramanova-0a3b6b2a5" target='_blank'>
+              <div className="footer-icon-box">
                 <FaLinkedin className="footer-icon" />
               </div>
-            </a>
+            </Link>
+
           </div>
         </div>
       </div>
