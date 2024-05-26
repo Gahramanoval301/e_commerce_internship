@@ -17,13 +17,15 @@ export default function ProductSlug() {
     //TODO highlighter function for texts
     const highlightText = (text) => {
         const regex = new RegExp(`(${searchText})`, 'gi');
-        return (
-            <span>
-                {text.split(regex).map((part, index) => (
-                    index % 2 === 0 ? part : <span key={index} className="highlight">{part}</span>
-                ))}
-            </span>
-        );
+        if (text) {
+            return (
+                <span>
+                    {text.split(regex).map((part, index) => (
+                        index % 2 === 0 ? part : <span key={index} className="highlight">{part}</span>
+                    ))}
+                </span>
+            );
+        }
     };
 
 
